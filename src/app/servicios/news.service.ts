@@ -19,4 +19,12 @@ export class NewsService {
     }).pipe
     (map(noticias => noticias.articles));
   }
+  getNoticiasDestacadasPorCategoria(categoria: string): Observable<Article[]>{
+    return this.http.get<RespuestaEndpoint>(`https://newsapi.org/v2/top-headlines?country=us&category=${categoria}`,{
+      params:{
+        apiKey:apiKey
+      }
+    }).pipe
+    (map(noticias => noticias.articles));
+  }
 }
