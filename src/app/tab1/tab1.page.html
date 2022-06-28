@@ -1,17 +1,38 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      El Universo News
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense" mode="ios" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">El Universo News</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card *ngFor="let articulo of articulos; let i= index ">
+    <ion-card-subtitle class="ion-margin">
+  
+      <ion-row class="ion-align-items-center">
+        <ion-col class="ion-margin">
+          <span class="item">{{ i+1 }}. </span>
+          <span class="articulo-source">{{articulo.source.name}}</span>
+        </ion-col>
+        <ion-col align="right">
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+  
+    </ion-card-subtitle>
+    <ion-card-title class="ion-padding-horizontal ion-margin-bottom">{{articulo.title}}</ion-card-title>
+    <ion-img *ngIf="articulo.urlToImage" [src]="articulo.urlToImage">
+    </ion-img>
+    <ion-card-content *ngIf="articulo.description">
+      <p>{{articulo.description}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
