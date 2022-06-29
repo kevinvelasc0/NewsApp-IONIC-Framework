@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NewsService } from '../servicios/news.service'
+import {StorageService } from '../servicios/storage.service'
 import {Article} from '../models'
 import { ActionSheetController, Platform } from '@ionic/angular';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
@@ -14,7 +15,8 @@ export class Tab1Page implements OnInit{
   
   constructor(
     
-    private newService: NewsService,  
+    private newService: NewsService,
+    private storageService: StorageService,   
     private actionSheet:ActionSheetController,
     private socialSharing: SocialSharing, 
     private platform: Platform,
@@ -37,6 +39,10 @@ export class Tab1Page implements OnInit{
         text: 'Compartir',
         icon: 'share-outline',
         handler: () => this.compartir(articulo)
+      },{
+        text: 'Favorito',
+        icon: 'heart-outline',
+        handler: () => this.esFavorito(articulo)
       },{
         text: 'Cancelar',
         icon: 'close-outline',
@@ -65,6 +71,9 @@ export class Tab1Page implements OnInit{
     }  
     
     window.open(articulo.url, '_blank');
+  }
+  esFavorito(articulo){
+    this.storageService.saveOrRemove(articulo);
   }
 
 }
